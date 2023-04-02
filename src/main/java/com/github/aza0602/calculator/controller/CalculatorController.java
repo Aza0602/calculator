@@ -12,4 +12,8 @@ public class CalculatorController {
         return "<h1 style=\"text-align: center\">Добро пожаловать в калькулятор</h1>";
     }
 
+    @GetMapping("/calculator/plus")
+    public String plus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
+        return a + " + " + b + " = " + (a + b);
+    }
 }
