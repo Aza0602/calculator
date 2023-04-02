@@ -26,4 +26,9 @@ public class CalculatorController {
     public String multiply(@RequestParam("num1") float a, @RequestParam("num2") float b) {
         return a + " * " + b + " = " + (a * b);
     }
+
+    @GetMapping("/calculator/divide")
+    public String divide(@RequestParam("num1") float a, @RequestParam("num2") float b) {
+        return a + " / " + b + " = " + (a / b);
+    }
 }
