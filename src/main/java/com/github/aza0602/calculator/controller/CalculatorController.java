@@ -21,4 +21,9 @@ public class CalculatorController {
     public String minus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
         return a + " - " + b + " = " + (a - b);
     }
+
+    @GetMapping("/calculator/multiply")
+    public String multiply(@RequestParam("num1") float a, @RequestParam("num2") float b) {
+        return a + " * " + b + " = " + (a * b);
+    }
 }
