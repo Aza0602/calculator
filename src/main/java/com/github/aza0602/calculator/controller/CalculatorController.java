@@ -16,4 +16,9 @@ public class CalculatorController {
     public String plus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
         return a + " + " + b + " = " + (a + b);
     }
+
+    @GetMapping("/calculator/minus")
+    public String minus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
+        return a + " - " + b + " = " + (a - b);
+    }
 }
