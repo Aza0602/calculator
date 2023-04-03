@@ -22,22 +22,50 @@ public class CalculatorController {
     }
 
     @GetMapping("/plus")
-    public String plus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
-        return a + " + " + b + " = " + calculatorService.plus(a, b);
+    public String plus(@RequestParam("num1") Float a, @RequestParam("num2") Float b) {
+        return buildViev("+", a, b);
     }
 
     @GetMapping("/minus")
-    public String minus(@RequestParam("num1") float a, @RequestParam("num2") float b) {
-        return a + " - " + b + " = " + calculatorService.minus(a, b);
+    public String minus(@RequestParam(value = "num1", required = false) Float a, @RequestParam(value = "num2", required = false) Float b) {
+        return buildViev("-", a, b);
     }
 
     @GetMapping("/multiply")
-    public String multiply(@RequestParam("num1") float a, @RequestParam("num2") float b) {
-        return a + " * " + b + " = " + calculatorService.multiply(a, b);
+    public String multiply(@RequestParam(value = "num1", required = false) Float a, @RequestParam(value = "num2", required = false) Float b) {
+        return buildViev("*", a, b);
     }
 
     @GetMapping("/divide")
-    public String divide(@RequestParam("num1") float a, @RequestParam("num2") float b) {
-        return a + " / " + b + " = " + calculatorService.divide(a, b);
+    public String divide(@RequestParam(value = "num1", required = false) Float a, @RequestParam(value = "num2", required = false) Float b) {
+        return buildViev("/", a, b);
+    }
+
+    private String buildViev(String operation, Float operand1, Float operand2) {
+        if (operand1 == null) {
+            return "Не передано первое число!";
+        } else if (operand2 == null) {
+            return "Не передано второе число!";
+        }
+        if ("/".equals(operation) && operand2 == 0) {
+            return "Делить на 0 нельзя!";
+        }
+        float result;
+        switch (operation) {
+            default:
+            case "+":
+                result = calculatorService.plus(operand1, operand2);
+                break;
+            case "-":
+                result = calculatorService.minus(operand1, operand2);
+                break;
+            case "*":
+                result = calculatorService.multiply(operand1, operand2);
+                break;
+            case "/":
+                result = calculatorService.divide(operand1, operand2);
+                break;
+        }
+        return operand1 + " " + operation + " " + operand2 + " = " + result;
     }
 }
